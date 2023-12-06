@@ -1,3 +1,5 @@
+import uuid
+
 from django.db import models
 from django.core.validators import MaxLengthValidator, MinLengthValidator
 
@@ -17,6 +19,7 @@ class Author(models.Model):
 
 
 class Post(models.Model):
+    id = models.UUIDField(default=uuid.uuid4, primary_key=True, editable=False)
     author = models.ManyToManyField(Author)
     visibility = models.BooleanField(blank=False, default=False)
     text = models.TextField(blank=False)
@@ -31,4 +34,3 @@ class Post(models.Model):
         for author in authors:
             writer += author.__str__() + ' ,'
         return f"By {writer} on {self.date.strftime('%x')} at {self.date.strftime('%I:%M %p')}"
-
