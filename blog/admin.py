@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Author, Post, Player, Coach
+from .models import Author, Post
 
 
 # Register your models here
@@ -18,17 +18,5 @@ class PostAdmin(admin.ModelAdmin):
         return f'{names}'
 
 
-class PlayerAdmin(admin.ModelAdmin):
-    list_filter = ('playing_history', 'age')
-    list_display = ('first_name', 'last_name', 'national_id', 'age', 'playing_history')
-
-
-class CoachAdmin(admin.ModelAdmin):
-    list_filter = ('certificate', 'professional_history')
-    list_display = ('first_name', 'last_name', 'national_id', 'age', 'professional_history')
-
-
 admin.site.register(Author)
 admin.site.register(Post, PostAdmin)
-admin.site.register(Coach, CoachAdmin)
-admin.site.register(Player, PlayerAdmin)
